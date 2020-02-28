@@ -1,3 +1,66 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-split-pane when="md"
+                contentId="principal">
+
+  <ion-menu side="start"
+            menuId="primerMenu"
+            contentId="principal">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Options Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-list-header>
+          <ion-label>CATEGORIES</ion-label>
+          <ion-button (click)="moveToCategories()"
+                      menuClose>
+            MANAGE
+          </ion-button>
+        </ion-list-header>
+        <ion-item button
+                  detail
+                  *ngFor="let category of db.categories; let i = index;"
+                  (click)="moveToCategory(i)">
+          <ion-icon name="albums"
+                    slot="start"></ion-icon>
+          <ion-label>&nbsp;{{category.name}}</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+        <ion-list-header>
+          <ion-label>ARCHIVED LISTS</ion-label>
+        </ion-list-header>
+        <ion-item button
+                  detail
+                  (click)="moveToCategory(db.categories.length)">
+          <ion-icon name="archive"
+                    slot="start"></ion-icon>
+          <ion-label>&nbsp;Archived</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+
+        <ion-list-header>
+          <ion-label>APP SETTINGS</ion-label>
+        </ion-list-header>
+        <ion-item button>
+          <ion-icon name="moon"
+                    slot="start"></ion-icon>
+          <ion-label>Toggle Dark Mode</ion-label>
+          <ion-toggle [(ngModel)]="modeCheck"
+                      (ionChange)="changeMode()"></ion-toggle>
+        </ion-item>
+
+        <ion-item button
+                  detail>
+          <ion-icon name="settings"
+                    slot="start"></ion-icon>
+          <ion-label>&nbsp;Settings</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="principal"></ion-router-outlet>
+</ion-split-pane>

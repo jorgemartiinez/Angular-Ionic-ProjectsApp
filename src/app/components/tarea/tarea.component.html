@@ -1,0 +1,13 @@
+<ion-item class="animate fadeIn fast">
+  <ion-label class="animated fadeIn">{{task.name}}</ion-label>
+
+  <ion-badge slot="end"
+             *ngIf="task.state"
+             color="success">done!</ion-badge>
+
+  <ion-badge slot="end"
+             *ngIf="!task.state"
+             color="warning">pending</ion-badge>
+  <ion-ripple-effect></ion-ripple-effect>
+  <ion-badge>{{task.created_at | date}}</ion-badge>
+</ion-item>

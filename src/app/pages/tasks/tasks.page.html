@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="animated fadeIn fast">{{listName}}!</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/lists"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <super-tabs [config]="">
+    <!-- Segements -->
+    <super-tabs-toolbar slot="top">
+      <!-- Segment 1 -->
+      <super-tab-button (click)="actualPage = 0">
+        <ion-label>ALL</ion-label>
+      </super-tab-button>
+      <!-- Segment 2 -->
+      <super-tab-button (click)="actualPage = 1">
+        <ion-label>PENDING</ion-label>
+      </super-tab-button>
+      <!-- Segment 3 -->
+      <super-tab-button (click)="actualPage = 2">
+        <ion-label>COMPLETED</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <!-- Tabs content -->
+    <super-tabs-container>
+      <!-- Tab 1 -->
+      <super-tab>
+        <ion-header class="ion-no-border">
+          <ion-button expand="block"
+                      shape="round"
+                      (click)="createTask()">Create Task</ion-button>
+        </ion-header>
+        <ion-content>
+
+          <app-tareas [tasks]="db.tasks"
+                      *ngIf="db.tasks.length > 0"></app-tareas>
+          <ion-text color="primary"
+                    *ngIf="db.tasks.length <= 0"
+                    class="ion-padding">No tasks found! Please create your first one!</ion-text>
+
+        </ion-content>
+      </super-tab>
+      <!-- Tab 2 -->
+      <super-tab>
+        <ion-content>
+
+        </ion-content>
+      </super-tab>
+      <!-- Tab 3 -->
+      <super-tab>
+        <ion-content>
+
+        </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+
+</ion-content>

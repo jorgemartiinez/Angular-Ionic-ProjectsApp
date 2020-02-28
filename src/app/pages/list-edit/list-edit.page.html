@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="animated fadeIn fast" *ngIf="id">Edit List</ion-title>
+    <ion-title class="animated fadeIn fast" *ngIf="!id">Add List</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/lists"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form #editListForm="ngForm">
+          <ion-list>
+          <ion-item class="animated fadeIn fast">
+            <ion-label position="floating">List name</ion-label>
+            <ion-input type="text"
+                       name="name"
+                       required="true"
+                       [ngModel]="list?.name"
+                       (ngModelChange)="list.name=$event"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select value="brown" okText="Okay" cancelText="Dismiss" required="true" [(ngModel)]="list.category_id" (ngModelChange)="list.category_id=$event" name="category_id" >
+              <ion-select-option value="nulled" selected>None</ion-select-option>
+              <ion-select-option  *ngFor="let category of db.categories" [value]="category.id" >{{category.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- Fab esquina derecha para añadir listas -->
+  <ion-fab vertical="bottom"
+           horizontal="end"
+           slot="fixed">
+    <ion-fab-button color="danger"
+                    (click)="editList(editListForm)">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

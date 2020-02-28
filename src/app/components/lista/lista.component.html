@@ -1,0 +1,11 @@
+<ion-item class="animate fadeIn fast"
+          (click)="goToTasks()" ion-button
+          ion-long-press
+          [interval]="500"
+          (pressed)="showOptions(list.id)"
+          button
+          detail>
+  <ion-label>{{list.name}}</ion-label>
+  <ion-ripple-effect></ion-ripple-effect>
+  <ion-badge>{{list.created_at | date}}</ion-badge>
+</ion-item>

@@ -1,0 +1,110 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!triggerSearch"
+                  (click)="triggerSearch = true">
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="search"
+                  class="animated fadeIn slow"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="triggerSearch"
+                  (click)="triggerSearch = false; termino = ''">
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="eye"
+                  class="animated fadeIn slow"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!triggerSearch"
+               class="animated fadeIn slow">Lists</ion-title>
+    <ion-searchbar animated
+                   (ionChange)="searchBar($event)"
+                   (ionCancel)="searchBar($event)"
+                   ionClear="searchBar($event)"
+                   *ngIf="triggerSearch"
+                   class="animated fadeIn slow"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding">
+
+  <super-tabs id="mainTabs"
+              toolbarColor="light"
+              toolbarBackground="dark"
+              indicatorColor="light"
+              badgeColor="light"
+              #superTabs
+              activeTabIndex = activeTab
+              (tabChange)="onTabSelect($event)"
+              [config]="{ sideMenu: 'left' }"
+              >
+    <!-- Segements -->
+    <super-tabs-toolbar slot="top"
+                        scrollable>
+      <!-- Segment 1 -->
+      <super-tab-button>
+        <ion-label>ALL</ion-label>
+      </super-tab-button>
+      <!-- Segment 2 -->
+      <super-tab-button>
+        <ion-label>NO CATEGORY</ion-label>
+      </super-tab-button>
+      <!-- Segment 2 -->
+      <super-tab-button *ngFor="let category of db.categories">
+        <ion-label>{{category.name}}</ion-label>
+      </super-tab-button>
+      <!-- Segment 2 -->
+      <super-tab-button>
+        <ion-label>ARCHIVED</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <!-- Tabs content -->
+    <super-tabs-container>
+      <!-- Tab 1 -->
+      <super-tab>
+        <ion-content>
+          <app-listas [lists]="db.lists | search:termino | archived: false"></app-listas>
+          <!-- Fab esquina derecha para añadir listas -->
+          <ion-fab vertical="bottom"
+                   horizontal="end"
+                   slot="fixed">
+            <ion-fab-button color="danger"
+                            class="animtaed fadeIn fast"
+                            (click)="goToAddList()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-content>
+      </super-tab>
+
+      <!-- Tab 2 -->
+      <super-tab>
+        <ion-content>
+          <app-listas [lists]="db.lists | search:termino | category: null | archived: false "></app-listas>
+        </ion-content>
+      </super-tab>
+      <!-- Tab 2 -->
+      <super-tab *ngFor="let category of db.categories">
+        <ion-content>
+          <app-listas [lists]="db.lists | search:termino | category: category.id | archived: false "></app-listas>
+        </ion-content>
+      </super-tab>
+      <!-- Tab 3 -->
+      <super-tab>
+        <ion-content>
+          <app-listas [lists]="db.lists | search:termino | archived: true"></app-listas>
+        </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>
