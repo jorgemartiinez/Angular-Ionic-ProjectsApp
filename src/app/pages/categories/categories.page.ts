@@ -18,7 +18,8 @@ export class CategoriesPage implements OnInit {
 
     ngOnInit() {}
 
-    async showOptions(id: string) {
+    async showOptions(event, id: string) {
+        event.stopPropagation();
         const list = this.db.searchListById(id);
 
         const actionSheet = await this.aSheet.create({
@@ -28,7 +29,7 @@ export class CategoriesPage implements OnInit {
                     text: 'Edit Category',
                     icon: 'build',
                     handler: () => {
-                        this.editCategory(id);
+                        this.router.navigateByUrl(`tabs/categories/edit/${id}`);
                     }
                 },
                 {
@@ -49,37 +50,6 @@ export class CategoriesPage implements OnInit {
         await actionSheet.present();
     }
 
-   async createCategory() {
-        const alert = await this.alertCtrl.create({
-            header: 'New category',
-            subHeader: 'Create category',
-            inputs: [
-                {
-                    name: 'name',
-                    type: 'text',
-                    placeholder: 'Category name...'
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Confirm Cancel');
-                    }
-                },
-                {
-                    text: 'Ok',
-                    handler: async (data: any) => {
-                        this.db.addCategory(data.name);
-                    }
-                }
-            ]
-        });
-
-        await alert.present();
-    }
 
     async deleteCategory(id: string) {
         const alert = await this.alertCtrl.create({
@@ -104,38 +74,12 @@ export class CategoriesPage implements OnInit {
         await alert.present();
     }
 
-    async editCategory(id?: string) {
-        const category = this.db.searchCategoryById(id);
-        const alert = await this.alertCtrl.create({
-            header: 'Edit category',
-            subHeader: 'Edit this category',
-            inputs: [
-                {
-                    name: 'name',
-                    type: 'text',
-                    value: category.name,
-                    placeholder: 'Category name...'
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Confirm Cancel');
-                    }
-                },
-                {
-                    text: 'Ok',
-                    handler: async (data: any) => {
-                        category.name = data.name;
-                        await this.db.editCategory(category);
-                    }
-                }
-            ]
-        });
+    createCategory() {
+        this.router.navigateByUrl('tabs/categories/edit');
+    }
 
-        await alert.present();
+    moveToCategory(index: number) {
+        console.log('vamos al tab de esta categoria en lists');
+        this.router.navigateByUrl('/tabs/lists/category/' + index);
     }
 }

@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListasComponent } from './listas/listas.component';
 import { ListaComponent } from './lista/lista.component';
-import { LongPressModule } from 'ionic-long-press';
 
 @NgModule({
   declarations: [ListasComponent, ListaComponent, TareaComponent, TareasComponent],
@@ -16,7 +15,6 @@ import { LongPressModule } from 'ionic-long-press';
   imports: [
     CommonModule,
     IonicModule.forRoot(),
-    LongPressModule
   ]
 })
 export class ComponentsModule { }

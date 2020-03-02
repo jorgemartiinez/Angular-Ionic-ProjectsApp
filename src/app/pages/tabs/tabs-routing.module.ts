@@ -62,6 +62,16 @@ const routes: Routes = [
                 ]
             },
             {
+                path: 'categories/edit',
+                loadChildren: () =>
+                    import('../category-edit/category-edit.module').then((m) => m.CategoryEditPageModule)
+            },
+            {
+                path: 'categories/edit/:id',
+                loadChildren: () =>
+                    import('../category-edit/category-edit.module').then((m) => m.CategoryEditPageModule)
+            },
+            {
                 path: 'home',
                 children: [
                     {

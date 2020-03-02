@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="animated fadeIn fast" *ngIf="id">Edit List</ion-title>
-    <ion-title class="animated fadeIn fast" *ngIf="!id">Add List</ion-title>
+    <ion-title class="animated fadeIn fast"
+               *ngIf="id">Edit List</ion-title>
+    <ion-title class="animated fadeIn fast"
+               *ngIf="!id">Add List</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/lists"></ion-back-button>
     </ion-buttons>
@@ -13,21 +15,69 @@
       <ion-col size="12">
         <form #editListForm="ngForm">
           <ion-list>
-          <ion-item class="animated fadeIn fast">
-            <ion-label position="floating">List name</ion-label>
-            <ion-input type="text"
-                       name="name"
-                       required="true"
-                       [ngModel]="list?.name"
-                       (ngModelChange)="list.name=$event"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Category</ion-label>
-            <ion-select value="brown" okText="Okay" cancelText="Dismiss" required="true" [(ngModel)]="list.category_id" (ngModelChange)="list.category_id=$event" name="category_id" >
-              <ion-select-option value="nulled" selected>None</ion-select-option>
-              <ion-select-option  *ngFor="let category of db.categories" [value]="category.id" >{{category.name}}</ion-select-option>
-            </ion-select>
-          </ion-item>
+            <ion-item class="animated fadeIn fast">
+              <ion-label position="floating">List Name</ion-label>
+              <ion-icon name="clipboard"
+                        slot="start"></ion-icon>
+              <ion-input type="text"
+                         name="name"
+                         required="true"
+                         maxlength="120"
+                         [ngModel]="list?.name"
+                         (ngModelChange)="list.name=$event"></ion-input>
+            </ion-item>
+            <ion-item class="animated fadeIn fast">
+              <ion-label position="floating">Quick Note</ion-label>
+              <ion-icon name="book"
+                        slot="start"></ion-icon>
+              <ion-input type="text"
+                         name="name"
+                         maxlength="60"
+                         required="true"
+                         [ngModel]="list?.note"
+                         (ngModelChange)="list.note=$event"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Select Category</ion-label>
+              <ion-icon name="albums"
+                        slot="start"></ion-icon>
+              <ion-select okText="Okay"
+                          cancelText="Dismiss"
+                          required="true"
+                          [(ngModel)]="list.category_id"
+                          (ngModelChange)="list.category_id=$event"
+                          name="category_id">
+                <ion-select-option value="nulled"
+                                   selected>None</ion-select-option>
+                <ion-select-option *ngFor="let category of db.categories"
+                                   [value]="category.id"
+                                   >{{category.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Color Selected Below</ion-label>
+              <ion-icon name="brush"
+                        slot="start"></ion-icon>
+              <input type="color"
+                     [value]="list.color"
+                     disabled
+                     class="ion-text-right">
+            </ion-item>
+            <ion-item lines="full">
+              <input type="hidden"
+                     [(ngModel)]="list.color"
+                     #change
+                     name="color"
+                     (ngModelChange)="list.color=$event">
+              <div class="buttonColors">
+                <button ion-item
+                        *ngFor="let color of db.colors"
+                        class="picker-button"
+                        [ngStyle]="{ 'background-color': color}"
+                        (click)="update(color)">
+                </button>
+              </div>
+            </ion-item>
           </ion-list>
         </form>
       </ion-col>

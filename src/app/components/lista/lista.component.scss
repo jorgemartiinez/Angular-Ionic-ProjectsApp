@@ -1,0 +1,28 @@
+ion-card {
+    border-left: 5px ;
+    max-width: 100%;
+}
+
+ion-icon {
+    padding: 0;
+}
+ion-card-header{
+    padding-bottom: 3px;
+}
+.noticia-more {
+    font-size: 25px !important;
+    position: absolute;
+    right: -10px;
+    top: -5px;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.text {
+    display: inline-block;
+    vertical-align: middle;
+}

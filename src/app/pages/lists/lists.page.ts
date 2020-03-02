@@ -31,10 +31,12 @@ export class ListsPage implements OnInit, OnDestroy, AfterViewInit {
     ) {}
 
     async ngOnInit() {
+        await this.db.getLists();
         this.eb.showListOptions$.subscribe((id) => {
             if (id) {
                 console.log('el id de la lista es', id);
                 this.showOptions(id);
+                return;
             }
         });
     }
@@ -61,6 +63,7 @@ export class ListsPage implements OnInit, OnDestroy, AfterViewInit {
     }
 
     async showOptions(id: string) {
+
         const list = this.db.searchListById(id);
         const objArchived = this.getOptionArchived(list);
         const actionSheet = await this.aSheet.create({

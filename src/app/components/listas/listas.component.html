@@ -1,11 +1,8 @@
-<ion-grid>
-  <ion-row style="width: 100%;">
-    <ion-col>
-      <ion-list>
-        <app-lista *ngFor="let list of lists; let idx = index"
-                   [list]="list"
-                   [index]="idx"></app-lista>
-      </ion-list>
+<ion-grid >
+  <ion-row>
+    <ion-col *ngFor="let list of lists; let idx = index" size="12">
+      <app-lista [list]="list"
+                 [index]="idx"></app-lista>
     </ion-col>
   </ion-row>
 </ion-grid>

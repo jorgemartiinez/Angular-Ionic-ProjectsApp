@@ -1,32 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="animated fadeIn fast">Edit Categories</ion-title>
+    <ion-title class="animated fadeIn fast">Manage Categories</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/lists"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-header class="ion-no-border">
-  <ion-button expand="block"
-              shape="round"
-              (click)="createCategory()">
-              <ion-icon name="add-circle" slot="start"></ion-icon>
-              <ion-label>Create Category</ion-label></ion-button>
-</ion-header>
+
 <ion-content>
   <ion-list>
     <ion-item class="animate fadeIn fast"
-              *ngFor="let category of db.categories"
-              ion-button
-              ion-long-press
-              [interval]="500"
-              (pressed)="showOptions(category.id)"
-              button
-              detail>
-      <ion-icon name="albums"
+              *ngFor="let category of db.categories; let i = index;"
+              lines="full"
+              (click)="moveToCategory(i)"
+              button>
+      <ion-icon [name]="category.icon"
                 slot="start"></ion-icon>
       <ion-label>{{category.name}}</ion-label>
       <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon name="options"
+                slot="end"
+                (click)="showOptions($event, category.id)"></ion-icon>
     </ion-item>
   </ion-list>
+
+  <!-- Fab esquina derecha para añadir listas -->
+  <ion-fab vertical="bottom"
+           horizontal="end"
+           slot="fixed">
+    <ion-fab-button color="primary"
+                    (click)="createCategory()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

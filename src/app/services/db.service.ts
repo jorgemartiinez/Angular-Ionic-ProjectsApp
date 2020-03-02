@@ -3,7 +3,6 @@ import { Storage } from '@ionic/storage';
 import { v4 as uid } from 'uuid';
 import * as faker from 'faker';
 import { List, Task, Category, Note } from './../interfaces/interfaces';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +13,27 @@ export class DbService {
     public categories: Category[] = [];
     public notes: Note[] = [];
     public loading = true;
+    public colors = [ '#FF4444', '#FFBB33', '#00C851', '#33B5E5', '#4B515D', '#3F729B', '#FFCdd2', '#CE93D8' ];
+    public icons = [
+        'albums',
+        'alarm',
+        'analytics',
+        'aperture',
+        'basket',
+        'beer',
+        'bicycle',
+        'book',
+        'briefcase',
+        'build',
+        'cafe',
+        'car',
+        'cart',
+        'cloud-outline',
+        'code'
+    ];
 
     constructor(private storage: Storage) {
-      //  this.populateExampleStorage();
+        // this.populateExampleStorage();
         this.getLists().then((lists) => {
             if (lists) {
                 console.log('obtenemos las listas en el constructor de db mediante una promesa');
@@ -39,6 +56,8 @@ export class DbService {
             {
                 id: uid(),
                 name: faker.name.jobTitle(),
+                note: 'quick note 1',
+                color: '#33B5E5',
                 created_at: new Date(),
                 tasks: [
                     {
@@ -54,12 +73,14 @@ export class DbService {
                         state: 1
                     }
                 ],
-                archived: true,
+                archived: false,
                 category_id: '1'
             },
             {
                 id: uid(),
                 name: faker.name.jobTitle(),
+                note: 'quick note 2',
+                color: '#DC3545',
                 created_at: new Date(),
                 tasks: [
                     {
@@ -74,6 +95,7 @@ export class DbService {
             },
             {
                 id: uid(),
+                color: '#28A745',
                 name: faker.name.jobTitle(),
                 created_at: new Date(),
                 tasks: [
@@ -84,7 +106,7 @@ export class DbService {
                         state: 1
                     }
                 ],
-                archived: true,
+                archived: false,
                 category_id: '2'
             }
         ]);
@@ -93,15 +115,18 @@ export class DbService {
             {
                 id: '1',
                 name: 'Category 1',
+                icon: 'code',
                 created_at: new Date()
             },
             {
                 id: '2',
+                icon: 'bicycle',
                 name: 'Category 2',
                 created_at: new Date()
             },
             {
                 id: '3',
+                icon: 'car',
                 name: 'Category 3',
                 created_at: new Date()
             }
@@ -123,24 +148,31 @@ export class DbService {
         if (list.category_id === 'nulled') {
             list.category_id = null;
         }
-        this.lists.unshift({
+
+        const newList = {
             id: uid(),
             name: list.name,
+            color: list.color,
             created_at: new Date(),
             tasks: [],
             archived: false,
             category_id: list.category_id
-        });
+        };
+
+        this.lists = [ newList, ...this.lists ];
 
         return await this.saveLists();
     }
 
-    async addCategory(name: string) {
-        this.categories.unshift({
+    async addCategory(category: Category) {
+
+        const newCategory = {
             id: uid(),
-            name,
-            created_at: new Date()
-        });
+            name: category.name,
+            icon: category.icon
+        };
+        this.categories = [ newCategory, ...this.categories ];
+
         await this.saveCategories();
     }
     async editList(list: List) {
@@ -161,6 +193,14 @@ export class DbService {
     async editCategory(category: Category) {
         let searchedCategory = this.searchCategoryById(category.id);
         searchedCategory = category;
+
+        this.categories = this.categories.map((category) => {
+            if (category.id === searchedCategory.id) {
+                category = searchedCategory;
+                return category;
+            }
+            return category;
+        });
         await this.saveCategories();
     }
     async getTasksByList(id: string) {

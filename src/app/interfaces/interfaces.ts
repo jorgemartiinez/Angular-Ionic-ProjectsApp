@@ -1,9 +1,11 @@
 export interface List {
     id?: string;
     name?: string;
+    note?: string;
     created_at?: Date;
     tasks?: Task[];
     archived?: boolean;
+    color?: string;
     category_id?: string;
 }
 
@@ -21,6 +23,7 @@ export interface Task {
 export interface Category {
     id?: string;
     name?: string;
+    icon?: string;
     created_at?: Date;
 }
 

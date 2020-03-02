@@ -12,8 +12,6 @@ import { AppComponent } from './app.component';
 import { EventBusService } from './services/event-bus.service';
 
 // Plugins
-import { IonicGestureConfig } from '../utils/IonicGestureConfig';
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 // Cordova - Ionic
@@ -46,7 +44,6 @@ import { DbService } from './services/db.service';
         EventBusService,
         UiServiceService,
         LocalNotifications,
-        { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig }
     ],
     bootstrap: [ AppComponent ]
 })

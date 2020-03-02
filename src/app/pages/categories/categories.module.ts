@@ -1,4 +1,3 @@
-import { LongPressModule } from 'ionic-long-press';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import { CategoriesPage } from './categories.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    LongPressModule,
     CategoriesPageRoutingModule
   ],
   declarations: [CategoriesPage]

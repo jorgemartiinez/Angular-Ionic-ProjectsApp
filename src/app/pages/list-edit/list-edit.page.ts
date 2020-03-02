@@ -1,3 +1,4 @@
+import { UiServiceService } from './../../services/ui-service.service';
 import { List, Category } from './../../interfaces/interfaces';
 import { DbService } from './../../services/db.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -19,7 +20,12 @@ export class ListEditPage implements OnInit {
 
     category: Category = {};
 
-    constructor(private activatedRoute: ActivatedRoute, public db: DbService, private navCtrl: NavController) {}
+    constructor(
+        private activatedRoute: ActivatedRoute,
+        public db: DbService,
+        private navCtrl: NavController,
+        private ui: UiServiceService
+    ) {}
 
     ngOnInit() {
         this.activatedRoute.params.subscribe((params) => {
@@ -31,6 +37,7 @@ export class ListEditPage implements OnInit {
                 }
             } else {
                 console.log('no tenemos id');
+                this.list.color = '#FF4444';
             }
         });
     }
@@ -52,5 +59,16 @@ export class ListEditPage implements OnInit {
 
         await this.db.editList(this.list);
         this.navCtrl.back();
+    }
+
+    applyStyle(color: string) {
+        const styles = { 'background-color': color };
+        return styles;
+    }
+
+    update(value: string) {
+        console.log('value before button click' + this.list.color);
+        this.list.color = value;
+        console.log('value after button click' + this.list.color);
     }
 }

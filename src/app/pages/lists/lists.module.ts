@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ListsPage } from './lists.page';
 import { PipesModule } from './../../pipes/pipes.module';
-import { CategoriesPage } from '../categories/categories.page';
 
 @NgModule({
   imports: [

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="animated fadeIn fast"
+               *ngIf="id">Edit Category</ion-title>
+    <ion-title class="animated fadeIn fast"
+               *ngIf="!id">Add Category</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/categories"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form #editCategoryForm="ngForm">
+          <ion-list>
+            <ion-item class="animated fadeIn fast">
+              <ion-label position="floating">Category Name</ion-label>
+              <ion-icon name="clipboard"
+                        slot="start"></ion-icon>
+              <ion-input type="text"
+                         name="name"
+                         required="true"
+                         maxlength="120"
+                         [ngModel]="category?.name"
+                         (ngModelChange)="category.name=$event"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Select an icon</ion-label>
+              <ion-icon name="help"
+                        slot="start"></ion-icon>
+              <ion-icon [name]="category.icon" slot="end" color="primary">
+              </ion-icon>
+            </ion-item>
+
+            <ion-item lines="full">
+              <div class="iconsRow">
+                <button ion-item
+                        *ngFor="let icon of db.icons"
+                        class="picker-button"
+                        (click)="update(icon)"
+                        fill="clear">
+                  <ion-icon [name]="icon"
+                   size="large" [color]="checkColor(icon)"></ion-icon>
+                </button>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- Fab esquina derecha para añadir listas -->
+  <ion-fab vertical="bottom"
+           horizontal="end"
+           slot="fixed">
+    <ion-fab-button color="danger"
+                    (click)="editCategory(editCategoryForm)">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

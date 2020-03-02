@@ -22,7 +22,7 @@
                   detail
                   *ngFor="let category of db.categories; let i = index;"
                   (click)="moveToCategory(i)">
-          <ion-icon name="albums"
+          <ion-icon [name]="category.icon"
                     slot="start"></ion-icon>
           <ion-label>&nbsp;{{category.name}}</ion-label>
           <ion-ripple-effect></ion-ripple-effect>
