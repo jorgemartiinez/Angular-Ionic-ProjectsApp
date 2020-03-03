@@ -12,7 +12,29 @@
     <ion-content>
       <ion-list>
         <ion-list-header>
-          <ion-label>CATEGORIES</ion-label>
+          <ion-label>HOME</ion-label>
+        </ion-list-header>
+        <ion-item button
+                  detail
+                  (click)="this.ionMenu.close(); navCtrl.navigateRoot('tabs/home')">
+          <ion-icon name="home"
+                    slot="start"></ion-icon>
+          <ion-label>&nbsp;Home</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+        <ion-list-header>
+          <ion-label>LISTS</ion-label>
+        </ion-list-header>
+        <ion-item button
+                  detail
+                  (click)="this.ionMenu.close(); navCtrl.navigateRoot('tabs/lists')">
+          <ion-icon name="attach"
+                    slot="start"></ion-icon>
+          <ion-label>&nbsp;Lists</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-item>
+        <ion-list-header>
+          <ion-label>CATEGORIES OF LISTS</ion-label>
           <ion-button (click)="moveToCategories()"
                       menuClose>
             MANAGE
@@ -21,7 +43,7 @@
         <ion-item button
                   detail
                   *ngFor="let category of db.categories; let i = index;"
-                  (click)="moveToCategory(i)">
+                  (click)="moveToCategory(category.id)">
           <ion-icon [name]="category.icon"
                     slot="start"></ion-icon>
           <ion-label>&nbsp;{{category.name}}</ion-label>
@@ -32,7 +54,7 @@
         </ion-list-header>
         <ion-item button
                   detail
-                  (click)="moveToCategory(db.categories.length)">
+                  (click)="this.ionMenu.close(); navCtrl.navigateRoot('tabs/lists/archived')">
           <ion-icon name="archive"
                     slot="start"></ion-icon>
           <ion-label>&nbsp;Archived</ion-label>

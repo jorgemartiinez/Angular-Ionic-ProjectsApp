@@ -4,7 +4,6 @@ import { NavController } from '@ionic/angular';
 import { DbService } from './../../services/db.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { runInThisContext } from 'vm';
 
 @Component({
     selector: 'app-category-edit',

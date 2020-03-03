@@ -17,22 +17,21 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'lists',
+                path: 'lists/category/:id',
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('../lists/lists.module').then((m) => m.ListsPageModule)
+                        loadChildren: () =>
+                            import('../list-by-category/list-by-category.module').then(
+                                (m) => m.ListByCategoryPageModule
+                            )
                     }
                 ]
             },
             {
-                path: 'lists/category/:index',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () => import('../lists/lists.module').then((m) => m.ListsPageModule)
-                    }
-                ]
+                path: 'lists/archived',
+                loadChildren: () =>
+                    import('../lists-archived/lists-archived.module').then((m) => m.ListsArchivedPageModule)
             },
             {
                 path: 'lists/edit/:id',
@@ -92,11 +91,6 @@ const routes: Routes = [
             {
                 path: 'categories',
                 loadChildren: () => import('../categories/categories.module').then((m) => m.CategoriesPageModule)
-            },
-            {
-                path: '',
-                redirectTo: '/tabs/lists',
-                pathMatch: 'full'
             }
         ]
     },

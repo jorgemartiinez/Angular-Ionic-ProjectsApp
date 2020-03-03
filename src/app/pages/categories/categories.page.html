@@ -8,28 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item class="animate fadeIn fast"
-              *ngFor="let category of db.categories; let i = index;"
-              lines="full"
-              (click)="moveToCategory(i)"
-              button>
-      <ion-icon [name]="category.icon"
-                slot="start"></ion-icon>
-      <ion-label>{{category.name}}</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-      <ion-icon name="options"
-                slot="end"
-                (click)="showOptions($event, category.id)"></ion-icon>
-    </ion-item>
-  </ion-list>
+  <app-categorias [categories]="db.categories"></app-categorias>
 
   <!-- Fab esquina derecha para añadir listas -->
   <ion-fab vertical="bottom"
            horizontal="end"
            slot="fixed">
     <ion-fab-button color="primary"
-                    (click)="createCategory()">
+                    (click)="router.navigateByUrl('tabs/categories/edit')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

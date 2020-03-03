@@ -1,6 +1,6 @@
-import { DbService } from './../services/db.service';
-import { List } from './../interfaces/interfaces';
 import { Pipe, PipeTransform } from '@angular/core';
+import { DbService } from './../services/db.service';
+import { List, Category } from './../interfaces/interfaces';
 
 @Pipe({
     name: 'search',
@@ -8,11 +8,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchPipe implements PipeTransform {
     constructor(private db: DbService) {}
-    transform(lists: List[], termino: string): List[] {
+    transform(items , termino: string ) {
         console.log('llamen al pipe', termino);
         if (/\S/.test(termino)) {
-            return lists.filter((list) => list.name.toUpperCase().includes(termino.toUpperCase()));
+            if (items) {
+                return items.filter((item) => item.name.toUpperCase().includes(termino.toUpperCase()));
+            }
         }
-        return this.db.lists;
+        return items;
     }
 }

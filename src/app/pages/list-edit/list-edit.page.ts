@@ -32,6 +32,7 @@ export class ListEditPage implements OnInit {
             if (params.id) {
                 this.id = params.id;
                 this.list = this.db.searchListById(this.id);
+                console.log('buscada', this.list);
                 if (this.list.category_id == null) {
                     this.list.category_id = 'nulled';
                 }

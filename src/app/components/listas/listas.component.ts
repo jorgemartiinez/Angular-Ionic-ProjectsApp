@@ -1,5 +1,4 @@
-import { EventBusService } from './../../services/event-bus.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-listas',
@@ -8,9 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListasComponent implements OnInit {
     @Input() lists;
+    @Output() listSize = new EventEmitter<number>();
 
-    constructor(private eb: EventBusService) {}
+    constructor() {}
 
-    ngOnInit() {}
-
+    ngOnInit() {
+        if (this.lists) {
+            this.listSize.emit(this.lists.length);
+        }
+    }
 }

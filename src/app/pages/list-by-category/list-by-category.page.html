@@ -1,0 +1,17 @@
+<app-search-bar [title]="categoryName"
+                (search)="search($event)"></app-search-bar>
+
+<ion-content>
+  <app-listas *ngIf="showList"
+              [lists]="db.lists | search: termino | category: id | archived: false"
+              (listSize)="getListSize($event)"></app-listas>
+
+  <ion-text class="ion-padding ion-text-center animated fadeIn fast"
+            color="danger"
+            *ngIf="!showList"
+            style="display:flex; vertical-align: middle;">No lists found for this category.</ion-text>
+
+  <app-back-button></app-back-button>
+
+  <app-add-list-button></app-add-list-button>
+</ion-content>

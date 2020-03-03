@@ -10,8 +10,7 @@ const routes: Routes = [
       path: '**',
       pathMatch: 'full',
       redirectTo: 'tabs/lists'
-    }
-  
+    },
 ];
 @NgModule({
     imports: [ RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }) ],

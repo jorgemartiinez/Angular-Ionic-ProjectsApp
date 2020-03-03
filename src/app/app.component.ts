@@ -21,7 +21,7 @@ export class AppComponent {
         private statusBar: StatusBar,
         public db: DbService,
         private localNoti: LocalNotifications,
-        private navCtrl: NavController
+        public navCtrl: NavController
     ) {
         this.initializeApp();
         this.initializeNotifications();
@@ -53,14 +53,12 @@ export class AppComponent {
         }
     }
 
-    moveToCategory(index: number) {
-        console.log('vamos al tab de esta categoria en lists');
-        this.ionMenu.close();
-        this.navCtrl.navigateRoot('/tabs/lists/category/' + index);
-    }
-
     moveToCategories() {
         this.ionMenu.close();
         this.navCtrl.navigateRoot('tabs/categories');
+    }
+    moveToCategory(id: string) {
+        this.ionMenu.close();
+        this.navCtrl.navigateRoot(`tabs/lists/category/${id}`);
     }
 }

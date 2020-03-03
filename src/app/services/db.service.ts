@@ -265,4 +265,11 @@ export class DbService {
         });
         await this.saveLists();
     }
+
+    getCategoryName(id: string) {
+        if (!id) {
+            return 'No category';
+        }
+        return this.categories.find((category) => category.id === id).name || null;
+    }
 }

@@ -1,3 +1,4 @@
+import { SharedListService } from './services/shared-list.service';
 // Angular
 import { FormsModule } from '@angular/forms';
 import { UiServiceService } from './services/ui-service.service';
@@ -9,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 // App Level Routes
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventBusService } from './services/event-bus.service';
 
 // Plugins
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
@@ -41,7 +41,7 @@ import { DbService } from './services/db.service';
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         DbService,
-        EventBusService,
+        SharedListService,
         UiServiceService,
         LocalNotifications,
     ],

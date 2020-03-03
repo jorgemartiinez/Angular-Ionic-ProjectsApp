@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="!triggerSearch"
+                  (click)="triggerSearch = true">
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="search"
+                  class="animated fadeIn slow"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="triggerSearch"
+                  (click)="triggerSearch = false; termino = ''">
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="eye"
+                  class="animated fadeIn slow"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only"
+                  size="small"
+                  name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!triggerSearch"
+               class="animated fadeIn slow">{{title}}</ion-title>
+    <ion-searchbar animated
+                   (ionChange)="searchBar($event)"
+                   (ionCancel)="searchBar($event)"
+                   ionClear="searchBar($event)"
+                   *ngIf="triggerSearch"
+                   class="animated fadeIn slow"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>

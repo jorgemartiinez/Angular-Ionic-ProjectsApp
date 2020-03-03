@@ -1,0 +1,17 @@
+<app-search-bar title="Archived Lists"
+                (search)="search($event)"></app-search-bar>
+
+
+<ion-content>
+  <app-listas *ngIf="showList"
+              [lists]="db.lists | search: termino | archived: true"
+              (listSize)="getListSize($event)"></app-listas>
+
+  <ion-text class="ion-padding ion-text-center animated fadeIn fast"
+            color="danger"
+            *ngIf="!showList"
+            style="display:flex; vertical-align: middle;">No archived lists.</ion-text>
+
+  <app-back-button></app-back-button>
+
+</ion-content>
