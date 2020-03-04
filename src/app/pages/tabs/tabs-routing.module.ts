@@ -71,15 +71,6 @@ const routes: Routes = [
                     import('../category-edit/category-edit.module').then((m) => m.CategoryEditPageModule)
             },
             {
-                path: 'home',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () => import('../home/home.module').then((m) => m.HomePageModule)
-                    }
-                ]
-            },
-            {
                 path: 'notes',
                 children: [
                     {
@@ -87,6 +78,14 @@ const routes: Routes = [
                         loadChildren: () => import('../notes/notes.module').then((m) => m.NotesPageModule)
                     }
                 ]
+            },
+            {
+                path: 'notes/edit/:id',
+                loadChildren: () => import('../note-edit/note-edit.module').then((m) => m.NoteEditPageModule)
+            },
+            {
+                path: 'notes/edit',
+                loadChildren: () => import('../note-edit/note-edit.module').then((m) => m.NoteEditPageModule)
             },
             {
                 path: 'categories',

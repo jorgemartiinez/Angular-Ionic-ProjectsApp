@@ -14,12 +14,10 @@ export class CompletedPipe implements PipeTransform {
         case 'all':
             return finalTasks;
         case 'pending':
-            finalTasks = tasks.filter((task) => task.state === 0);
-            // console.log('los pending', finalTasks);
+            finalTasks = tasks.filter((task) => task.state === false);
             return finalTasks;
         case 'completed':
-            finalTasks = tasks.filter((task) => task.state === 1);
-            // console.log('los completed', finalTasks);
+            finalTasks = tasks.filter((task) => task.state === true);
             return finalTasks;
         default:
             return finalTasks;

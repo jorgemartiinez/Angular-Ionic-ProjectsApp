@@ -1,0 +1,41 @@
+<ion-list>
+  <ion-list>
+    <ion-reorder-group [disabled]="false"
+                       (ionItemReorder)="reorder($event)">
+      <ion-item-sliding *ngFor="let note of notes"
+                        #slidingItem>
+        <ion-item (click)="moveToNote(note.id)"
+                  lines="full">
+          <ion-icon name="star"
+                    slot="start"
+                    *ngIf="note.fav"
+                    style="color: #f2b01e"></ion-icon>
+          <ion-label class="ion-text-wrap">{{note.name | slice: 0:20}}</ion-label>
+          <ion-badge>{{note.created_at | date}}</ion-badge>
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option (click)="delete(note.id, slidingItem)"
+                           color="danger">
+            <ion-icon slot="icon-only"
+                      name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option (click)="favorite(note.id, slidingItem)"
+                           color="warning">
+            <ion-icon slot="icon-only"
+                      name="star"
+                      style="color: white"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="primary"
+                           (click)="share(note.id, slidingItem)">
+            <ion-icon slot="icon-only"
+                      name="share"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-list>
+
+</ion-list>

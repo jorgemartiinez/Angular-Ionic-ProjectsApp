@@ -1,11 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Notes
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-search-bar title="Notes" [showSocial]="false" (search)="search($event)"></app-search-bar>
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -13,4 +6,15 @@
     </ion-toolbar>
   </ion-header>
 
+  <app-notes-component [notes]="db.notes | search: termino"></app-notes-component>
+  <!-- boton añadir-->
+  <ion-fab vertical="bottom"
+           horizontal="end"
+           slot="fixed">
+    <ion-fab-button color="light"
+                    class="animated fadeIn fast"
+                    (click)="navCtrl.navigateRoot('tabs/notes/edit')">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

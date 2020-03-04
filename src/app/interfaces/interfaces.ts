@@ -10,14 +10,14 @@ export interface List {
 }
 
 
-type stateRange = 0|1;
 export interface Task {
     id?: string;
     name?: string;
-    state?: stateRange;
+    state?: boolean;
     created_at?: Date;
     updated_at?: Date;
     list_id?: string;
+    fav?: boolean;
 }
 
 export interface Category {
@@ -29,6 +29,7 @@ export interface Category {
 
 export interface Note {
     id?: string;
-    content?: string;
+    name?: string;
+    fav?: boolean;
     created_at?: Date;
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { DbService } from './../../services/db.service';
 
 @Component({
   selector: 'app-notes',
@@ -6,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['notes.page.scss']
 })
 export class NotesPage {
-
-  constructor() {}
-
+  termino = '';
+  constructor(private db: DbService, public navCtrl: NavController) {}
+  search(term: string) {
+    this.termino = term;
+}
 }

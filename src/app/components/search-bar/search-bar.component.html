@@ -3,6 +3,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button auto-hide="false"></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="primary">
       <ion-button *ngIf="!triggerSearch"
@@ -19,10 +20,12 @@
                   name="eye"
                   class="animated fadeIn slow"></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="socialShareF($event)" *ngIf="showSocial">
         <ion-icon slot="icon-only"
                   size="small"
-                  name="share"></ion-icon>
+                  name="logo-whatsapp"
+                  style="color: green;"
+                  ></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title *ngIf="!triggerSearch"

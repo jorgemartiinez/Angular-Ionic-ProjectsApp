@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DbService } from './../../services/db.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-categories',
@@ -7,5 +8,9 @@ import { DbService } from './../../services/db.service';
     styleUrls: [ './categories.page.scss' ]
 })
 export class CategoriesPage {
-    constructor(public db: DbService) {}
+    termino = '';
+    constructor(public db: DbService, private router: Router) {}
+    search(term: string) {
+        this.termino = term;
+    }
 }

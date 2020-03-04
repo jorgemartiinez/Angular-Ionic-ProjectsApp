@@ -9,7 +9,6 @@ import { List, Category } from './../interfaces/interfaces';
 export class SearchPipe implements PipeTransform {
     constructor(private db: DbService) {}
     transform(items , termino: string ) {
-        console.log('llamen al pipe', termino);
         if (/\S/.test(termino)) {
             if (items) {
                 return items.filter((item) => item.name.toUpperCase().includes(termino.toUpperCase()));

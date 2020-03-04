@@ -1,3 +1,46 @@
 <ion-list>
-  <app-tarea *ngFor="let task of tasks; let i = index" [task]="task" [index]="i"></app-tarea>
+  <ion-reorder-group [disabled]="false"
+                     (ionItemReorder)="reorder($event)">
+    <ion-item-sliding *ngFor="let task of tasks; let i = index"
+                      #it>
+      <ion-item class="animate fadeIn fast ion-text-wrap"
+                lines="full"
+                [ngClass]="{'fav': task.fav }">
+        <ion-toggle slot="start"
+                    color="tertiary"
+                    [checked]="task.state"
+                    (ionChange)="toggleChange($event, task)"></ion-toggle>
+        <ion-label class="animated fadeIn"
+                   [ngClass]="{'completed': task.state }"
+                   id="task-name">{{task.name}}</ion-label>
+        <ion-badge>
+          <ion-label>{{task.created_at | date: 'short'}}</ion-label>
+        </ion-badge>
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-reorder slot="end">
+          <ion-icon slot="icon-only"
+                    name="reorder-two-outline"
+                    size="small"></ion-icon>
+        </ion-reorder>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="primary"
+                         (click)="editTask(task.id, it)">
+          <ion-icon slot="icon-only"
+                    name="brush"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger"
+                         (click)="delTask(task.id, it)">
+          <ion-icon slot="icon-only"
+                    name="trash"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="warning"
+                         (click)="favTask(task.id, it)">
+          <ion-icon slot="icon-only"
+                    name="star"
+                    style="color: white"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-reorder-group>
 </ion-list>

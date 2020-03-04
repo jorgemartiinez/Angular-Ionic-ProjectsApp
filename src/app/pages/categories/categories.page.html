@@ -1,22 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="animated fadeIn fast">Manage Categories</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs/lists"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-search-bar title="Manage Categories"
+                (search)="search($event)" (socialShare)="socialSharing($event)" [showSocial]="false"></app-search-bar>
 
 <ion-content>
-  <app-categorias [categories]="db.categories"></app-categorias>
+  <app-categorias [categories]="db.categories | search: termino"></app-categorias>
 
   <!-- Fab esquina derecha para añadir listas -->
   <ion-fab vertical="bottom"
            horizontal="end"
            slot="fixed">
-    <ion-fab-button color="primary"
+    <ion-fab-button color="danger"
                     (click)="router.navigateByUrl('tabs/categories/edit')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <app-back-button></app-back-button>
 </ion-content>

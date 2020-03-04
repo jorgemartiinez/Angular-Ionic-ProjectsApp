@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { AlertController, ActionSheetController } from '@ionic/angular';
 import { DbService } from './db.service';
 import { Router } from '@angular/router';
@@ -8,12 +8,18 @@ import { List } from './../interfaces/interfaces';
     providedIn: 'root'
 })
 export class SharedListService {
+    @Output() numCompletedEvent$: EventEmitter<number> = new EventEmitter();
+
     constructor(
         private db: DbService,
         private alertController: AlertController,
         private aSheet: ActionSheetController,
         private router: Router
     ) {}
+
+    numCompletedTrigger() {
+        this.numCompletedEvent$.emit(true);
+    }
 
     async showOptions(id: string) {
         const list = this.db.searchListById(id);

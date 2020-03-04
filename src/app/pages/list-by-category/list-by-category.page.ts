@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbService } from './../../services/db.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
     selector: 'app-list-by-category',
@@ -13,7 +14,7 @@ export class ListByCategoryPage implements OnInit {
     termino = '';
     showList = true;
 
-    constructor(public db: DbService, private actRoute: ActivatedRoute) {}
+    constructor(public db: DbService, private actRoute: ActivatedRoute, private social: SocialSharing) {}
 
     ngOnInit() {
         const paramId = this.actRoute.snapshot.params.id;
@@ -32,5 +33,17 @@ export class ListByCategoryPage implements OnInit {
 
     search(term: string) {
         this.termino = term;
+    }
+
+    socialSharing(event) {
+        let msg = `*Lists of category ${this.categoryName}* \n`;
+
+        for (let list of this.db.lists) {
+            if (list.category_id === this.id) {
+                msg += `_${list.name}_\n`;
+            }
+        }
+
+        this.social.shareViaWhatsApp(msg);
     }
 }

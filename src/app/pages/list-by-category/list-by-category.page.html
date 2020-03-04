@@ -1,5 +1,5 @@
 <app-search-bar [title]="categoryName"
-                (search)="search($event)"></app-search-bar>
+                (search)="search($event)" (socialShare)="socialSharing($event)" [showSocial]="true"></app-search-bar>
 
 <ion-content>
   <app-listas *ngIf="showList"

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar class="animated fadeIn fast">
+    <ion-title *ngIf="id">Edit Note</ion-title>
+    <ion-title *ngIf="!id">Add New Note</ion-title>
+    <ion-label slot="end" 
+               [ngClass]="{'full': content.length == 1600, 'casi-full': content.length > 1500, 'ok': content.length < 1500}">
+      {{content.length}}/1600</ion-label>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/notes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-textarea autofocus
+                class="animated fadeIn fast"
+                maxLength="1600"
+                minLength="1"
+                required
+                [(ngModel)]="content"
+                rows="40"></ion-textarea>
+  <!-- boton añadir-->
+  <ion-fab vertical="bottom"
+           horizontal="end"
+           slot="fixed">
+    <ion-fab-button color="danger"
+                    class="animated fadeIn fast"
+                    (click)="createNote()">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

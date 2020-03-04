@@ -1,3 +1,4 @@
+import { PipesModule } from './../../pipes/pipes.module';
 import { CategoriesPageRoutingModule } from './categories-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ import { CategoriesPage } from './categories.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     ComponentsModule,
     CategoriesPageRoutingModule
   ],

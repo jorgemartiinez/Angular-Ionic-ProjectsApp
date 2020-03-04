@@ -23,7 +23,7 @@
                          name="name"
                          required="true"
                          maxlength="120"
-                         [ngModel]="list?.name"
+                         [(ngModel)]="list.name"
                          (ngModelChange)="list.name=$event"></ion-input>
             </ion-item>
             <ion-item class="animated fadeIn fast">
@@ -31,10 +31,10 @@
               <ion-icon name="book"
                         slot="start"></ion-icon>
               <ion-input type="text"
-                         name="name"
+                         name="note"
                          maxlength="60"
                          required="true"
-                         [ngModel]="list?.note"
+                         [(ngModel)]="list.note"
                          (ngModelChange)="list.note=$event"></ion-input>
             </ion-item>
             <ion-item>
@@ -47,11 +47,11 @@
                           [(ngModel)]="list.category_id"
                           (ngModelChange)="list.category_id=$event"
                           name="category_id">
-                <ion-select-option value="nulled"
+                - <ion-select-option value="nulled"
                                    selected>None</ion-select-option>
+
                 <ion-select-option *ngFor="let category of db.categories"
-                                   [value]="category.id"
-                                   >{{category.name}}</ion-select-option>
+                                   [value]="category.id">{{category.name}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item lines="none">
